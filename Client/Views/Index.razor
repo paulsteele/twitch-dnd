@@ -1,0 +1,12 @@
+﻿@page "/"
+@attribute [AllowAnonymous]
+@inject NavigationManager _navigationManager
+
+<AuthorizeView>
+	<Authorized>
+		<p>Welcome!</p>
+	</Authorized>
+	<NotAuthorized>
+		@if (true) { _navigationManager.NavigateTo("login"); }
+	</NotAuthorized>
+</AuthorizeView>

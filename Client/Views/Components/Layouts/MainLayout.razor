@@ -1,0 +1,25 @@
+@using Microsoft.Extensions.Logging
+@using hub.Client.Services.Authentication
+@inherits LayoutComponentBase
+@inject HttpClient _http
+@inject ILogger _logger
+@inject IAuthService _authService
+
+@{
+	var anonymousOptions = new List<(string, string)> {("Login", "/login")};
+	var authedOptions = new List<(string, string)> {("Todo", "/todo"), ("Scale", "/scale")};
+}
+
+<div class="main">
+	<AuthorizeView>
+		<Authorized>
+			<Navbar Items="@authedOptions"></Navbar>
+		</Authorized>
+		<NotAuthorized>
+			<Navbar Items="@anonymousOptions"></Navbar>
+		</NotAuthorized>
+	</AuthorizeView>
+	<div class="container">
+		@Body
+	</div>
+</div>

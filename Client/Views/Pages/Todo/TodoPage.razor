@@ -1,0 +1,11 @@
+﻿@page "/Todo"
+
+@{
+	var tabs = new (string, RenderFragment)[]
+	{
+		("Today", null),
+		("All", @<TodoAllView />),
+	};
+}
+
+<TabbedContent Tabs="@tabs" />
