@@ -4,7 +4,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using hub.Server.Configuration;
 using hub.Server.Database;
-using hub.Server.NativeBle;
 using hub.Shared.Registration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -108,7 +107,6 @@ namespace hub.Server
 			builder.Register(context => LoggerFactory.Create(logBuilder => logBuilder.AddConsole())).As<ILoggerFactory>();
 
 			builder.RegisterType<Db>().As<IDb>().SingleInstance();
-			builder.RegisterType<Bluetooth>().As<IBluetooth>().SingleInstance();
 			builder.RegisterType<EnvironmentVariableConfiguration>().As<IEnvironmentVariableConfiguration>().SingleInstance();
 			CommonContainer.Register(builder);
 		}

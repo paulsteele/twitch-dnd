@@ -25,6 +25,13 @@
     <_ContentIncludedByDefault Remove="Views\Scale\Scale.razor" />
     <_ContentIncludedByDefault Remove="Views\Scale\ScaleSetup.razor" />
     <_ContentIncludedByDefault Remove="Views\Account\Login.razor" />
+    <_ContentIncludedByDefault Remove="Views\Components\Todo\TodoEntry.razor" />
+    <_ContentIncludedByDefault Remove="Views\Components\Todo\TodoItem.razor" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Countdown\CountdownPage.razor" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Scale\ScalePage.razor" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Scale\ScaleSetupPage.razor" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Todo\TodoAllView.razor" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Todo\TodoPage.razor" />
   </ItemGroup>
 
 </Project>
