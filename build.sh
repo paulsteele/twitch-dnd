@@ -3,7 +3,7 @@
 set -eo pipefail
 SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
-BUILD_PROJECT_FILE="$SCRIPT_DIR/Build/hub.Build.csproj"
+BUILD_PROJECT_FILE="$SCRIPT_DIR/Build/twitchDnd.Build.csproj"
 TEMP_DIRECTORY="$SCRIPT_DIR//.nuke/temp"
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
