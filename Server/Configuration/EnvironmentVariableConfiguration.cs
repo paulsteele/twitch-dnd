@@ -25,7 +25,7 @@ namespace hub.Server.Configuration {
 			DatabasePort = GetVar(nameof(DatabasePort), "3306", ConvertString);
 			DatabaseUser = GetVar(nameof(DatabaseUser), "root", ConvertString);
 			DatabasePassword = GetVar(nameof(DatabasePassword), "pass", ConvertString);
-			DatabaseName = GetVar(nameof(DatabaseName), "hub", ConvertString);
+			DatabaseName = GetVar(nameof(DatabaseName), "twitch_dnd", ConvertString);
 		}
 
 		private static T GetVar<T>(string name, T defaultValue, Func<string, T> converter) {
