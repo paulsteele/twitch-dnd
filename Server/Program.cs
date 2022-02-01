@@ -18,7 +18,6 @@ namespace twitchDnd.Server
 				})
 				.Build();
 
-			await host.Services.GetAutofacRoot().Resolve<EnsureUserHelper>().EnsureUser();
 
 			await host.RunAsync();
 		}

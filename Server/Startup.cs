@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using twitchDnd.Server.Commands;
 
 namespace twitchDnd.Server
 {
@@ -58,6 +59,7 @@ namespace twitchDnd.Server
 
 			using ILifetimeScope setupScope = AutofacContainer.BeginLifetimeScope();
 			setupScope.Resolve<IDb>().Init();
+			setupScope.Resolve<EnsureUserHelper>().EnsureUser().Wait();
 		}
 
 		public void ConfigureServices(IServiceCollection services) {
