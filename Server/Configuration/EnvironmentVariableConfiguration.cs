@@ -29,7 +29,7 @@ namespace twitchDnd.Server.Configuration {
 			DatabasePassword = GetVar(nameof(DatabasePassword), "pass", ConvertString);
 			DatabaseName = GetVar(nameof(DatabaseName), "twitch_dnd", ConvertString);
 			DefaultUserName = GetVar(nameof(DefaultUserName), "user", ConvertString);
-			DefaultUserPass = GetVar(nameof(DefaultUserName), "pass", ConvertString);
+			DefaultUserPass = GetVar(nameof(DefaultUserPass), "pass", ConvertString);
 		}
 
 		private static T GetVar<T>(string name, T defaultValue, Func<string, T> converter) {
