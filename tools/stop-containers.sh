@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-podman stop hub-db 
-podman stop hub-adminer
+podman stop twitch-dnd-db
+podman stop twitch-dnd-adminer

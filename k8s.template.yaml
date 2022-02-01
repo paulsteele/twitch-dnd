@@ -64,7 +64,7 @@ spec:
             - name: DatabasePort
               value: "3307"
             - name: DatabaseName
-              value: twitch-dnd
+              value: twitch_dnd
             - name: DatabaseUser
               valueFrom: 
                 secretKeyRef:

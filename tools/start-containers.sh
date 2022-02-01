@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-podman start hub-db
-podman start hub-adminer
+podman start twitch-dnd-db
+podman start twitch-dnd-adminer
