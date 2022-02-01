@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 as builder
-WORKDIR /hub
+WORKDIR /twitchDnd
 
-COPY hub.sln .
+COPY twitch-dnd.sln .
 COPY Client/twitchDnd.Client.csproj Client/twitchDnd.Client.csproj
 COPY Server/twitchDnd.Server.csproj Server/twitchDnd.Server.csproj
 COPY Shared/twitchDnd.Shared.csproj Shared/twitchDnd.Shared.csproj
@@ -16,7 +16,7 @@ COPY . .
 RUN ./build.sh publish 
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 as runner
-WORKDIR /hub
+WORKDIR /twitchDnd
 
 COPY --from=builder /twitchDnd/Client/bin/Release/net5.0/publish ./Client
 COPY --from=builder /twitchDnd/Server/bin/Release/net5.0/publish ./Server
