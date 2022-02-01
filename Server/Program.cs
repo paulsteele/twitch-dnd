@@ -9,8 +9,6 @@ using Microsoft.Extensions.Hosting;
 namespace twitchDnd.Server
 {
 	public static class Program {
-		private const string AddUserCommand = "addUser";
-
 		public static async Task Main(string[] args)
 		{
 			IHost host = Host.CreateDefaultBuilder(args)
@@ -20,11 +18,7 @@ namespace twitchDnd.Server
 				})
 				.Build();
 
-			if (args.Contains(AddUserCommand)) {
-				await host.Services.GetAutofacRoot().Resolve<AddUserCommand>().StartCommand();
-
-				return;
-			}
+			await host.Services.GetAutofacRoot().Resolve<EnsureUserHelper>().EnsureUser();
 
 			await host.RunAsync();
 		}
