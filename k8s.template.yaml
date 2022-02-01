@@ -80,6 +80,16 @@ spec:
                 secretKeyRef:
                   name: twitch-dnd 
                   key: JwtSecurityKey
+            - name: DefaultUserName
+              valueFrom:
+                secretKeyRef:
+                  name: twitch-dnd
+                  key: defaultUserName
+            - name: DefaultUserPass
+              valueFrom:
+                secretKeyRef:
+                  name: twitch-dnd
+                  key: defaultUserPass
             - name: JwtIssuer 
               value: twitch-dnd.paul-steele.com
             - name: JwtAudience
