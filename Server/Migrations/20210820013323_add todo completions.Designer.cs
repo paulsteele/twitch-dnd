@@ -225,7 +225,7 @@ namespace hub.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Todo.TodoCompletion", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Todo.TodoCompletion", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,7 +249,7 @@ namespace hub.Server.Migrations
                     b.ToTable("TodosCompletions");
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Todo.TodoModel", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Todo.TodoModel", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
@@ -322,9 +322,9 @@ namespace hub.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Todo.TodoCompletion", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Todo.TodoCompletion", b =>
                 {
-                    b.HasOne("hub.Shared.Models.Todo.TodoModel", "TodoModel")
+                    b.HasOne("twitchDnd.Shared.Models.Todo.TodoModel", "TodoModel")
                         .WithMany()
                         .HasForeignKey("TodoModelId");
 
@@ -337,7 +337,7 @@ namespace hub.Server.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Todo.TodoModel", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Todo.TodoModel", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

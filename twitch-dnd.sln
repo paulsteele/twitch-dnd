@@ -2,13 +2,13 @@
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.0.0
 MinimumVisualStudioVersion = 16.0.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hub.Server", "Server\hub.Server.csproj", "{A1BD2B56-0D77-469A-9EE2-6EC9EB463992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "twitchDnd.Server", "Server\twitchDnd.Server.csproj", "{A1BD2B56-0D77-469A-9EE2-6EC9EB463992}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hub.Client", "Client\hub.Client.csproj", "{BB8D766B-1EA7-4262-B383-D8BF89E453A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "twitchDnd.Client", "Client\twitchDnd.Client.csproj", "{BB8D766B-1EA7-4262-B383-D8BF89E453A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hub.Shared", "Shared\hub.Shared.csproj", "{954B0A98-1EE5-44C7-8784-BA7A4AA5953D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "twitchDnd.Shared", "Shared\twitchDnd.Shared.csproj", "{954B0A98-1EE5-44C7-8784-BA7A4AA5953D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hub.Build", "build\hub.Build.csproj", "{B0DDA318-0140-4F17-B2AC-574547A886F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "twitchDnd.Build", "build\twitchDnd.Build.csproj", "{B0DDA318-0140-4F17-B2AC-574547A886F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

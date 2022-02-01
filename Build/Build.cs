@@ -52,7 +52,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             DotNetRun(s => s
-                .SetProjectFile(Solution.GetProject("hub.Server"))
+                .SetProjectFile(Solution.GetProject("twitchDnd.Server"))
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
             );

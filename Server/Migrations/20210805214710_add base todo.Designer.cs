@@ -225,7 +225,7 @@ namespace hub.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Tasks.Todo", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Tasks.Todo", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,7 +298,7 @@ namespace hub.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("hub.Shared.Models.Tasks.Todo", b =>
+            modelBuilder.Entity("twitchDnd.Shared.Models.Tasks.Todo", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

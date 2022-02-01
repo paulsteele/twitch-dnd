@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <RootNamespace>hub.Client</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +18,7 @@
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" /> 
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\hub.Shared.csproj" />
+    <ProjectReference Include="..\Shared\twitchDnd.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Layouts\MainLayout.razor" />
