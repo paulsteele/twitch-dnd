@@ -3,15 +3,15 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using hub.Server.Configuration;
-using hub.Shared.Models;
+using twitchDnd.Server.Configuration;
+using twitchDnd.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace hub.Server.Controllers {
+namespace twitchDnd.Server.Controllers {
 
 	[ApiController]
 	[AllowAnonymous]

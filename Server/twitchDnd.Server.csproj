@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
-    <RootNamespace>hub.Server</RootNamespace>
+    <RootNamespace>twitchDnd.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

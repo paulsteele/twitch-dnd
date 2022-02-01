@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using hub.Server.Commands;
+using twitchDnd.Server.Commands;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace hub.Server
+namespace twitchDnd.Server
 {
 	public static class Program {
 		private const string AddUserCommand = "addUser";

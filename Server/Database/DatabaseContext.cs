@@ -1,10 +1,10 @@
-using hub.Server.Configuration;
+using twitchDnd.Server.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace hub.Server.Database {
+namespace twitchDnd.Server.Database {
 
 	public class DatabaseContext : IdentityDbContext {
 		private readonly EnvironmentVariableConfiguration _configuration;

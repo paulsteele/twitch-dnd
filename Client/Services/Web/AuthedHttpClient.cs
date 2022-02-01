@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using hub.Client.Services.Authentication;
+using twitchDnd.Client.Services.Authentication;
 using Microsoft.AspNetCore.Components;
 
-namespace hub.Client.Services.Web
+namespace twitchDnd.Client.Services.Web
 {
 
     public class AuthedHttpClient : HttpClient

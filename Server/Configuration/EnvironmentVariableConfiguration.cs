@@ -1,6 +1,6 @@
 using System;
 
-namespace hub.Server.Configuration {
+namespace twitchDnd.Server.Configuration {
 	public interface IEnvironmentVariableConfiguration {
 		string JwtSecurityKey { get; }
 		string JwtIssuer { get; }

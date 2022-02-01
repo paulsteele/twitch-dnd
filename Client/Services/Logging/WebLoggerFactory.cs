@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace hub.Client.Logging {
+namespace twitchDnd.Client.Logging {
 	public class WebLoggerFactory : ILoggerFactory {
 		public void Dispose() {
 			throw new System.NotImplementedException();

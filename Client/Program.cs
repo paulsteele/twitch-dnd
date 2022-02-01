@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Blazored.LocalStorage;
-using hub.Client.Logging;
-using hub.Client.Services.Alerts;
-using hub.Client.Services.Authentication;
-using hub.Shared.Registration;
+using twitchDnd.Client.Logging;
+using twitchDnd.Client.Services.Alerts;
+using twitchDnd.Client.Services.Authentication;
+using twitchDnd.Shared.Registration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace hub.Client
+namespace twitchDnd.Client
 {
 	public class Program {
 		private static Uri _baseAddress;

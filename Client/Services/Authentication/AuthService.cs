@@ -8,13 +8,13 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using hub.Client.Services.Alerts;
-using hub.Shared.Models;
-using hub.Shared.Tools;
+using twitchDnd.Client.Services.Alerts;
+using twitchDnd.Shared.Models;
+using twitchDnd.Shared.Tools;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 
-namespace hub.Client.Services.Authentication {
+namespace twitchDnd.Client.Services.Authentication {
 	public interface IAuthService {
 		Task<LoginResult> Login(LoginModel loginModel);
 		Task<AuthenticationHeaderValue> GetAuthHeader();

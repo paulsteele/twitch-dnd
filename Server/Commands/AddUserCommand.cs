@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using hub.Server.Database;
+using twitchDnd.Server.Database;
 using Microsoft.AspNetCore.Identity;
 
-namespace hub.Server.Commands {
+namespace twitchDnd.Server.Commands {
 	public class AddUserCommand {
 		private readonly IDb _db;
 		private readonly UserManager<IdentityUser> _userManager;

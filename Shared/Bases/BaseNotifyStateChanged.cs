@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace hub.Shared.Bases {
+namespace twitchDnd.Shared.Bases {
 	public interface INotifyStateChanged
 	{
 		event Action StateChanged;

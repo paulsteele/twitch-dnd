@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
-namespace hub.Server.Migrations
+namespace twitchDnd.Server.Migrations
 {
     public partial class initialmigration : Migration
     {

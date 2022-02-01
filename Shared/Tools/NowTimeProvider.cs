@@ -1,6 +1,6 @@
 using System;
 
-namespace hub.Shared.Tools {
+namespace twitchDnd.Shared.Tools {
 	public interface INowTimeProvider {
 		DateTime Now { get; }
 	}

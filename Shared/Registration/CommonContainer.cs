@@ -2,7 +2,7 @@ using System.Reflection;
 using Autofac;
 using Microsoft.Extensions.Logging;
 
-namespace hub.Shared.Registration {
+namespace twitchDnd.Shared.Registration {
 	public class CommonContainer {
 
 		public static void Register(ContainerBuilder containerBuilder) {

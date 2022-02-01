@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "hub.Server": {
+    "twitchDnd.Server": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": false,

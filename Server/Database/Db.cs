@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace hub.Server.Database {
+namespace twitchDnd.Server.Database {
 	public interface IDb {
 		void Init();
 		DatabaseContext DatabaseContext { get; }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace hub.Shared.Models {
+namespace twitchDnd.Shared.Models {
 	public class LoginModel {
 
 		[Required]

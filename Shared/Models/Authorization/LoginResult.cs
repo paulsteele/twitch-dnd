@@ -1,4 +1,4 @@
-namespace hub.Shared.Models {
+namespace twitchDnd.Shared.Models {
 	public class LoginResult {
 		public bool Success { get; set; }
 		public string Error { get; set; }

@@ -1,6 +1,6 @@
-﻿using hub.Shared.Bases;
+﻿using twitchDnd.Shared.Bases;
 
-namespace hub.Client.Services.Alerts
+namespace twitchDnd.Client.Services.Alerts
 {
     public interface IAlertService : INotifyStateChanged
     {

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using hub.Client.Services.Authentication;
-using hub.Shared.Models;
+using twitchDnd.Client.Services.Authentication;
+using twitchDnd.Shared.Models;
 
-namespace hub.Client.ViewModels.Account {
+namespace twitchDnd.Client.ViewModels.Account {
 	public interface ILoginViewModel {
 		public Task<LoginResult> Login(LoginModel loginModel);
 	}

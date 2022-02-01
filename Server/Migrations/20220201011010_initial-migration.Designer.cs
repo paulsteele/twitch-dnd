@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using hub.Server.Database;
+using twitchDnd.Server.Database;
 
-namespace hub.Server.Migrations
+namespace twitchDnd.Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20220201011010_initial-migration")]

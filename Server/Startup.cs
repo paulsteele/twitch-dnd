@@ -2,9 +2,9 @@ using System.Reflection;
 using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using hub.Server.Configuration;
-using hub.Server.Database;
-using hub.Shared.Registration;
+using twitchDnd.Server.Configuration;
+using twitchDnd.Server.Database;
+using twitchDnd.Shared.Registration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -17,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace hub.Server
+namespace twitchDnd.Server
 {
 	public class Startup
 	{
