@@ -18,8 +18,8 @@ RUN ./build.sh publish
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runner
 WORKDIR /twitchDnd
 
-COPY --from=builder /twitchDnd/Client/bin/Release/net5.0/publish ./Client
-COPY --from=builder /twitchDnd/Server/bin/Release/net5.0/publish ./Server
+COPY --from=builder /twitchDnd/Client/bin/Release/net6.0/publish ./Client
+COPY --from=builder /twitchDnd/Server/bin/Release/net6.0/publish ./Server
 
 WORKDIR /twitchDnd/Client
 
