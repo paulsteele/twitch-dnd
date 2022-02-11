@@ -1,0 +1,38 @@
+@using twitchDnd.Shared.Models.Timer
+@using twitchDnd.Client.ViewModels.Timer
+
+@inject TimerViewModel _timerViewModel
+
+@if (_timerViewModel.Editing)
+{
+   <input
+      class="form-control form-control-lg"
+      type="number"
+      min="0"
+      placeholder=".form-control-lg"
+      aria-label=".form-control-lg"
+      @bind="_timerViewModel.TotalMinutes"
+   />
+   <input
+      class="form-control form-control-lg"
+      type="number"
+      min="0"
+      max="59"
+      placeholder=".form-control-lg"
+      aria-label=".form-control-lg"
+      @bind="_timerViewModel.TotalSeconds"
+   />
+}
+
+@code
+{
+   protected override void OnInitialized() {
+      base.OnInitialized();
+      _timerViewModel.StateChanged += StateHasChanged;
+   }
+
+   public void Dispose()
+   {
+      _timerViewModel.StateChanged -= StateHasChanged;
+   }
+}

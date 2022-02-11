@@ -1,0 +1,13 @@
+@using Microsoft.Extensions.Logging
+@using twitchDnd.Client.Views.Components.Timer
+@inherits LayoutComponentBase
+
+@inject HttpClient _http
+@inject ILogger _logger
+@inject NavigationManager _navigationManager
+
+@page "/dnd"
+
+<div class="main">
+	<Timer/>
+</div>
