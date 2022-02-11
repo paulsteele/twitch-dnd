@@ -15,5 +15,16 @@ namespace twitchDnd.Shared.Models.Timer
 			ElapsedTime = TimeSpan.Zero;
 			Running = false;
 		}
+
+		public bool AddSecond()
+		{
+			ElapsedTime = ElapsedTime.Add(new TimeSpan(0, 0, 1));
+			Running = !ElapsedTime.Equals(TotalTime);
+			if (!Running)
+			{
+				ElapsedTime = TimeSpan.Zero;
+			}
+			return !Running;
+		}
 	}
 }

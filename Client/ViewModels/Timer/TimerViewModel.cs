@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using twitchDnd.Shared.Bases;
 using twitchDnd.Shared.Models.Timer;
 
@@ -9,6 +8,7 @@ namespace twitchDnd.Client.ViewModels.Timer
 	{
 		private readonly TimerModal _modal = new(TimeSpan.Zero);
 		public string TimerValue => _modal.RemainingTime.ToString(@"mm\:ss");
+		private System.Timers.Timer _timer;
 
 		public string TotalMinutes
 		{
@@ -29,11 +29,29 @@ namespace twitchDnd.Client.ViewModels.Timer
 			{
 				if (int.TryParse(value, out var val) && val is > 0 and < 60)
 				{
-					_modal.TotalTime = new TimeSpan(0, _modal.TotalTime.Minutes, val);
+					_modal.TotalTime = new TimeSpan(_modal.TotalTime.Hours, _modal.TotalTime.Minutes, val);
 				}
 			}
 		}
 
 		public bool Editing => !_modal.Running;
+
+		public void Start()
+		{
+			_modal.Running = true;
+			_timer?.Dispose();
+			_timer = new System.Timers.Timer(1000);
+			_timer.Elapsed += (_, _) =>
+			{
+				if (_modal.AddSecond())
+				{
+					_timer.Dispose();
+				};
+				NotifyStateChanged();
+			};
+			_timer.AutoReset = true;
+			_timer.Enabled = true;
+			NotifyStateChanged();
+		}
 	}
 }

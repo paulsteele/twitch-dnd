@@ -1,38 +1,56 @@
-@using twitchDnd.Shared.Models.Timer
 @using twitchDnd.Client.ViewModels.Timer
-
 @inject TimerViewModel _timerViewModel
+@implements IDisposable
 
 @if (_timerViewModel.Editing)
 {
-   <input
-      class="form-control form-control-lg"
-      type="number"
-      min="0"
-      placeholder=".form-control-lg"
-      aria-label=".form-control-lg"
-      @bind="_timerViewModel.TotalMinutes"
-   />
-   <input
-      class="form-control form-control-lg"
-      type="number"
-      min="0"
-      max="59"
-      placeholder=".form-control-lg"
-      aria-label=".form-control-lg"
-      @bind="_timerViewModel.TotalSeconds"
-   />
+	<div class="row justify-content-center g-3">
+		<div class="col-md-auto">
+			<input
+				class="form-control form-control-lg"
+				type="number"
+				min="0"
+				max="99"
+				@bind="_timerViewModel.TotalMinutes"
+			/>
+		</div>
+		<div class="col-md-auto">
+			<p class="fs-3">:</p>
+		</div>
+		<div class="col-md-auto">
+			<input
+				class="form-control form-control-lg"
+				type="number"
+				min="0"
+				max="59"
+				@bind="_timerViewModel.TotalSeconds"/>
+		</div>
+	</div>
+	<div class="row justify-content-center g-3">
+		<div class="col-md-auto">
+			<button class="btn btn-primary my-2" @onclick="args => _timerViewModel.Start()">Start</button>
+		</div>
+	</div>
+}
+else
+{
+	<div class="row justify-content-center g-3">
+		<div class="col-md-auto">
+			<p class="fs-3">@_timerViewModel.TimerValue</p>
+		</div>
+	</div>
 }
 
 @code
 {
-   protected override void OnInitialized() {
-      base.OnInitialized();
-      _timerViewModel.StateChanged += StateHasChanged;
-   }
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		_timerViewModel.StateChanged += StateHasChanged;
+	}
 
-   public void Dispose()
-   {
-      _timerViewModel.StateChanged -= StateHasChanged;
-   }
+	public void Dispose()
+	{
+		_timerViewModel.StateChanged -= StateHasChanged;
+	}
 }
