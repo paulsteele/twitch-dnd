@@ -2,7 +2,7 @@
 Webpage to facilitate twitch plays dnd
 
 # Dependencies to install
-* [Dotnet 5](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+* [Dotnet 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 * [Podman](https://podman.io/getting-started/)
 * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=netcore-cli)
   * install the cli so calling `dotnet ef` is a valid command

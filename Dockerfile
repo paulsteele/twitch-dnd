@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 as builder
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as builder
 WORKDIR /twitchDnd
 
 COPY twitch-dnd.sln .
@@ -15,7 +15,7 @@ COPY . .
 
 RUN ./build.sh publish 
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 as runner
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runner
 WORKDIR /twitchDnd
 
 COPY --from=builder /twitchDnd/Client/bin/Release/net5.0/publish ./Client
