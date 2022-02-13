@@ -52,5 +52,6 @@ else
 	public void Dispose()
 	{
 		_timerViewModel.StateChanged -= StateHasChanged;
+		_timerViewModel.Dispose();
 	}
 }

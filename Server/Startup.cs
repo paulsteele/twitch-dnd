@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using twitchDnd.Server.Configuration;
@@ -11,12 +15,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using twitchDnd.Server.Commands;
+using twitchDnd.Server.Hubs;
+using twitchDnd.Server.Tasks;
 
 namespace twitchDnd.Server
 {
@@ -34,6 +40,7 @@ namespace twitchDnd.Server
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+			app.UseResponseCompression();
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -55,11 +62,17 @@ namespace twitchDnd.Server
 					endpoints.MapRazorPages();
 					endpoints.MapControllers();
 					endpoints.MapFallbackToFile("index.html");
+					endpoints.MapHub<ServerSignalRHub>("/hub", options =>
+					{
+						options.CloseOnAuthenticationExpiration = true;
+					});
 			});
 
-			using ILifetimeScope setupScope = AutofacContainer.BeginLifetimeScope();
-			setupScope.Resolve<IDb>().Init();
-			setupScope.Resolve<EnsureUserHelper>().EnsureUser().Wait();
+			var tasks = AutofacContainer.Resolve<IEnumerable<ITask>>();
+			foreach (var task in tasks)
+			{
+				task.Start();
+			}
 		}
 
 		public void ConfigureServices(IServiceCollection services) {
@@ -89,6 +102,24 @@ namespace twitchDnd.Server
 						ValidAudience = configuration.JwtAudience,
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.JwtSecurityKey))
 					};
+					
+					options.Events = new JwtBearerEvents
+					{
+						OnMessageReceived = context =>
+						{
+							var accessToken = context.Request.Query["access_token"];
+
+							// If the request is for our hub...
+							var path = context.HttpContext.Request.Path;
+							if (!string.IsNullOrEmpty(accessToken) &&
+								path.StartsWithSegments("/hub"))
+							{
+								// Read the token out of the query string
+								context.Token = accessToken;
+							}
+							return Task.CompletedTask;
+						}
+					};
 				});
 			services.AddControllersWithViews(options => {
 				var policy = new AuthorizationPolicyBuilder()
@@ -97,6 +128,12 @@ namespace twitchDnd.Server
 				options.Filters.Add(new AuthorizeFilter(policy));
 			});
 			services.AddRazorPages();
+			services.AddResponseCompression(opts =>
+			{
+				opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+					new[] { "application/octet-stream" });
+			});
+			services.AddSignalR();
 		}
 
 		public void ConfigureContainer(ContainerBuilder builder)
@@ -109,6 +146,7 @@ namespace twitchDnd.Server
 			builder.Register(context => LoggerFactory.Create(logBuilder => logBuilder.AddConsole())).As<ILoggerFactory>();
 
 			builder.RegisterType<Db>().As<IDb>().SingleInstance();
+			builder.RegisterType<InitDbTask>().As<ITask>().As<InitDbTask>().SingleInstance();
 			builder.RegisterType<EnvironmentVariableConfiguration>().As<IEnvironmentVariableConfiguration>().SingleInstance();
 			CommonContainer.Register(builder);
 		}

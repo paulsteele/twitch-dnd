@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using twitchDnd.Client.Services.Communication;
 
 namespace twitchDnd.Client
 {
@@ -47,6 +48,8 @@ namespace twitchDnd.Client
 			builder.RegisterType<AlertService>()
 				.As<IAlertService>()
 				.SingleInstance();
+
+			builder.RegisterType<SignalRHub>().As<SignalRHub>().SingleInstance();
 
 			CommonContainer.Register(builder);
 		}
