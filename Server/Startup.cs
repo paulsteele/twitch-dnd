@@ -147,6 +147,7 @@ namespace twitchDnd.Server
 
 			builder.RegisterType<Db>().As<IDb>().SingleInstance();
 			builder.RegisterType<InitDbTask>().As<ITask>().As<InitDbTask>().SingleInstance();
+			builder.RegisterType<TimerTask>().As<ITask>().As<TimerTask>().SingleInstance();
 			builder.RegisterType<EnvironmentVariableConfiguration>().As<IEnvironmentVariableConfiguration>().SingleInstance();
 			CommonContainer.Register(builder);
 		}

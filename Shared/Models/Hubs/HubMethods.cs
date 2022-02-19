@@ -2,5 +2,5 @@ namespace twitchDnd.Shared.Models.Hubs;
 
 public static class HubMethods
 {
-	public const string ReceiveMessage = nameof(ReceiveMessage);
+	public const string TimerSession = nameof(TimerSession);
 }

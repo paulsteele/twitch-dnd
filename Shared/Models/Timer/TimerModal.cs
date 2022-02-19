@@ -24,7 +24,22 @@ namespace twitchDnd.Shared.Models.Timer
 			{
 				ElapsedTime = TimeSpan.Zero;
 			}
-			return !Running;
+			return Running;
+		}
+
+		public void Start()
+		{
+			Running = true;
+		}
+
+		public void Pause()
+		{
+			Running = false;
+		}
+
+		public void Reset()
+		{
+			ElapsedTime = TimeSpan.Zero;
 		}
 	}
 }

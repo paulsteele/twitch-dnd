@@ -1,82 +1,59 @@
 using System;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Logging.Abstractions;
 using twitchDnd.Client.Services.Communication;
+using twitchDnd.Client.Services.Web;
 using twitchDnd.Shared.Bases;
 using twitchDnd.Shared.Models.Hubs;
 using twitchDnd.Shared.Models.Timer;
 
 namespace twitchDnd.Client.ViewModels.Timer
 {
-	public class TimerViewModel : BaseNotifyStateChanged, IDisposable
+	public class TimerViewModel : BaseNotifyStateChanged
 	{
 		private readonly SignalRHub _signalRHub;
-		private TimerModal _modal = new(TimeSpan.Zero);
-		public string TimerValue => _modal.RemainingTime.ToString(@"mm\:ss");
-		private System.Timers.Timer _timer;
+		public TimerSession Session { get; private set; } = new();
+		private AuthedHttpClient _httpClient;
+		public bool IsLoading { get; private set; }= true;
+		public string TimerValue => Session.RemainingTimeForCurrentMode.ToString(@"mm\:ss");
 
-		public TimerViewModel(SignalRHub signalRHub)
+		public TimerViewModel(SignalRHub signalRHub, AuthedHttpClient httpClient)
 		{
 			_signalRHub = signalRHub;
+			_httpClient = httpClient;
 			SetupConnection().ConfigureAwait(false);
 		}
 
 		private async Task SetupConnection()
 		{
 			await _signalRHub.Connect();
-			_signalRHub.Connection.On<TimerModal>(HubMethods.ReceiveMessage, modal => { _modal = modal; NotifyStateChanged();});
-		}
-
-		public string TotalMinutes
-		{
-			get => ((int) Math.Floor(_modal.TotalTime.TotalMinutes)).ToString();
-			set
+			await _httpClient.Init();
+			var response = await _httpClient.GetFromJsonAsync<TimerSession>("timer");
+			if (response != null)
 			{
-				if (int.TryParse(value, out var val) && val > 0)
-				{
-					_modal.TotalTime = new TimeSpan(0, val, _modal.TotalTime.Seconds);
-				}
-			}
-		}
-
-		public string TotalSeconds
-		{
-			get => _modal.TotalTime.Seconds.ToString();
-			set
-			{
-				if (int.TryParse(value, out var val) && val is > 0 and < 60)
-				{
-					_modal.TotalTime = new TimeSpan(_modal.TotalTime.Hours, _modal.TotalTime.Minutes, val);
-				}
-			}
-		}
-
-		public bool Editing => !_modal.Running;
-
-		public void Start()
-		{
-			_modal.Running = true;
-			_timer?.Dispose();
-			_timer = new System.Timers.Timer(1000);
-			_timer.Elapsed += (_, _) =>
-			{
-				if (_modal.AddSecond())
-				{
-					_timer.Dispose();
-				};
+				Session = response;
+				IsLoading = false;
 				NotifyStateChanged();
-			};
-			_timer.AutoReset = true;
-			_timer.Enabled = true;
-			NotifyStateChanged();
+			}
+			_signalRHub.Connection.On<TimerSession>(HubMethods.TimerSession, session =>
+			{
+				Session = session; NotifyStateChanged();
+			});
 		}
 
-		public void Dispose()
+		public bool Editing => !Session.Running;
+
+		public Task Start()
 		{
-			_timer?.Dispose();
+			return _httpClient.PostAsJsonAsync("timer/start", Session);
+		}
+
+		public Task Stop()
+		{
+			return _httpClient.PostAsync("timer/stop", null);
 		}
 	}
 }

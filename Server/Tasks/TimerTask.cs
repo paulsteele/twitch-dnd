@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using System.Timers;
 using Microsoft.AspNetCore.SignalR;
@@ -12,29 +11,55 @@ namespace twitchDnd.Server.Tasks;
 public class TimerTask : ITask
 {
 	private readonly IHubContext<ServerSignalRHub> _hub;
-	private readonly Timer _timer;
-	private readonly TimerModal _modal;
+	private Timer _timer;
 
 	public TimerTask(IHubContext<ServerSignalRHub> hub)
 	{
 		_hub = hub;
-		_modal = new TimerModal(new TimeSpan(1, 0, 0));
-		_timer = new Timer(1000)
-		{
-			AutoReset = true,
-			Enabled = true,
-		};
-		_timer.Elapsed += (sender, args) =>
-		{
-			_modal.AddSecond();
-			_hub.Clients?.All?.SendCoreAsync(HubMethods.ReceiveMessage, new[] {_modal});
-		};
+		Session = new TimerSession();
 	}
+
+	public TimerSession Session { get; set; }
+
 	public Task Start()
 	{
-		_timer.Start();
 		return Task.CompletedTask;
 	}
 
 	public bool Completed => false; // long running task
+
+	public void StartTimer()
+	{
+		lock (this)
+		{
+			_timer?.Dispose();
+			_timer = new Timer(1000)
+			{
+				AutoReset = true,
+				Enabled = true
+			};
+			_timer.Elapsed += (sender, args) =>
+			{
+				var running = Session.AddSecond();
+				_hub.Clients?.All?.SendCoreAsync(HubMethods.TimerSession, new[] {Session});
+				if (!running)
+				{
+					StopTimer();
+				}
+			};
+			_timer.Start();
+			Session.Start();
+			_hub.Clients?.All?.SendCoreAsync(HubMethods.TimerSession, new[] {Session});
+		}
+	}
+
+	public void StopTimer()
+	{
+		lock (this)
+		{
+			Session.Pause();
+			_timer.Stop();
+			_hub.Clients?.All?.SendCoreAsync(HubMethods.TimerSession, new[] {Session});
+		}
+	}
 }

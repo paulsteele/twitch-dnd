@@ -1,0 +1,50 @@
+@using twitchDnd.Shared.Models.Timer
+@using twitchDnd.Client.ViewModels.Timer
+@using Microsoft.AspNetCore.Components
+
+@inject TimerEditFieldViewModel _viewModel;
+
+<div class="row justify-content-center g-3">
+	<div class="col-md-auto">
+		<p class="fs-3">@Title</p>
+	</div>
+	<div class="col-md-auto">
+		<input
+			class="form-control form-control-lg"
+			type="number"
+			min="0"
+			max="99"
+			@bind="_viewModel.TotalMinutes"/>
+	</div>
+	<div class="col-md-auto">
+		<p class="fs-3">:</p>
+	</div>
+	<div class="col-md-auto">
+		<input
+			class="form-control form-control-lg"
+			type="number"
+			min="0"
+			max="59"
+			@bind="_viewModel.TotalSeconds"/>
+	</div>
+</div>
+
+@code
+{
+	private TimerModal _modal;
+
+	[Parameter]
+	public TimerModal Modal
+	{
+		get => _modal;
+		set
+		{
+			_modal = value;
+			_viewModel.Modal = value;
+			StateHasChanged();
+		}
+	}
+	
+	[Parameter]
+	public string Title { get; set; }
+}

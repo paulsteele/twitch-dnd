@@ -4,28 +4,8 @@
 
 @if (_timerViewModel.Editing)
 {
-	<div class="row justify-content-center g-3">
-		<div class="col-md-auto">
-			<input
-				class="form-control form-control-lg"
-				type="number"
-				min="0"
-				max="99"
-				@bind="_timerViewModel.TotalMinutes"
-			/>
-		</div>
-		<div class="col-md-auto">
-			<p class="fs-3">:</p>
-		</div>
-		<div class="col-md-auto">
-			<input
-				class="form-control form-control-lg"
-				type="number"
-				min="0"
-				max="59"
-				@bind="_timerViewModel.TotalSeconds"/>
-		</div>
-	</div>
+	<TimerEditField Title="Response Collection:" Modal="@_timerViewModel.Session.ResponseCollectionTimer"/>
+	<TimerEditField Title="Voting:" Modal="@_timerViewModel.Session.VotingTimer"/>
 	<div class="row justify-content-center g-3">
 		<div class="col-md-auto">
 			<button class="btn btn-primary my-2" @onclick="args => _timerViewModel.Start()">Start</button>
@@ -37,6 +17,11 @@ else
 	<div class="row justify-content-center g-3">
 		<div class="col-md-auto">
 			<p class="fs-3">@_timerViewModel.TimerValue</p>
+		</div>
+	</div>
+	<div class="row justify-content-center g-3">
+		<div class="col-md-auto">
+			<button class="btn btn-primary my-2" @onclick="args => _timerViewModel.Stop()">Stop</button>
 		</div>
 	</div>
 }
@@ -52,6 +37,5 @@ else
 	public void Dispose()
 	{
 		_timerViewModel.StateChanged -= StateHasChanged;
-		_timerViewModel.Dispose();
 	}
 }
