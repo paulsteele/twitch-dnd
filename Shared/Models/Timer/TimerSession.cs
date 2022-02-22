@@ -13,7 +13,7 @@ public enum TimerMode
 
 public class TimerSession
 {
-	public TimerMode Mode { get; private set; } = TimerMode.CollectingResponses;
+	public TimerMode Mode { get; set; } = TimerMode.CollectingResponses;
 	public TimerModal ResponseCollectionTimer { get; set; } = new TimerModal(new TimeSpan(0, 0, 30));
 	public TimerModal VotingTimer { get; set; } = new TimerModal(new TimeSpan(0, 0, 10));
 

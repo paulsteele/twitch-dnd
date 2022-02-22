@@ -48,6 +48,7 @@ namespace twitchDnd.Client.ViewModels.Timer
 
 		public Task Start()
 		{
+			Session.Mode = TimerMode.CollectingResponses;
 			return _httpClient.PostAsJsonAsync("timer/start", Session);
 		}
 
