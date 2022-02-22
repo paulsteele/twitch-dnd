@@ -9,13 +9,13 @@ public class TimerEditFieldViewModel
 
 	public string TotalMinutes
 	{
-		get => Modal != null ? ((int) Math.Floor(Modal.TotalTime.TotalMinutes)).ToString() : String.Empty;
+		get => Modal == null ? string.Empty : ((int) Math.Floor(Modal.RemainingTime.TotalMinutes)).ToString();
 		set => SetTimerMinutes(Modal, value);
 	}
 
 	public string TotalSeconds
 	{
-		get => Modal != null ? Modal.TotalTime.Seconds.ToString() : String.Empty;
+		get => Modal == null ? string.Empty : Modal.RemainingTime.Seconds.ToString();
 		set => SetTimerSeconds(Modal, value);
 	}
 
@@ -25,9 +25,10 @@ public class TimerEditFieldViewModel
 		{
 			return;
 		}
-		if (int.TryParse(value, out var val) && val > 0)
+		if (int.TryParse(value, out var val) && val >= 0)
 		{
-			modal.TotalTime = new TimeSpan(0, val, modal.TotalTime.Seconds);
+			modal.TotalTime = new TimeSpan(0, val, modal.RemainingTime.Seconds);
+			modal.ElapsedTime = TimeSpan.Zero;
 		}
 	}
 
@@ -38,9 +39,10 @@ public class TimerEditFieldViewModel
 			return;
 		}
 
-		if (int.TryParse(value, out var val) && val is > 0 and < 60)
+		if (int.TryParse(value, out var val) && val is >= 0 and < 60)
 		{
-			modal.TotalTime = new TimeSpan(modal.TotalTime.Hours, modal.TotalTime.Minutes, val);
+			modal.TotalTime = new TimeSpan(modal.RemainingTime.Hours, modal.RemainingTime.Minutes, val);
+			modal.ElapsedTime = TimeSpan.Zero;
 		}
 	}
 }

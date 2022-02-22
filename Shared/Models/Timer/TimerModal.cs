@@ -19,7 +19,7 @@ namespace twitchDnd.Shared.Models.Timer
 		public bool AddSecond()
 		{
 			ElapsedTime = ElapsedTime.Add(new TimeSpan(0, 0, 1));
-			Running = !ElapsedTime.Equals(TotalTime);
+			Running = ElapsedTime < TotalTime;
 			if (!Running)
 			{
 				ElapsedTime = TimeSpan.Zero;
