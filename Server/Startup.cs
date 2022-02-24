@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using twitchDnd.Server.Hubs;
+using twitchDnd.Server.Services;
 using twitchDnd.Server.Tasks;
 
 namespace twitchDnd.Server
@@ -147,7 +148,7 @@ namespace twitchDnd.Server
 
 			builder.RegisterType<Db>().As<IDb>().SingleInstance();
 			builder.RegisterType<InitDbTask>().As<ITask>().As<InitDbTask>().SingleInstance();
-			builder.RegisterType<TimerTask>().As<ITask>().As<TimerTask>().SingleInstance();
+			builder.RegisterType<SessionService>().As<SessionService>().SingleInstance();
 			builder.RegisterType<EnvironmentVariableConfiguration>().As<IEnvironmentVariableConfiguration>().SingleInstance();
 			CommonContainer.Register(builder);
 		}

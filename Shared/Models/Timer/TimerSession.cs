@@ -8,7 +8,7 @@ public enum TimerMode
 {
 	CollectingResponses,
 	Voting,
-	Stopped
+	Finished
 }
 
 public class TimerSession
@@ -55,7 +55,7 @@ public class TimerSession
 						VotingTimer.Start();
 						return true;
 					case TimerMode.Voting:
-						Mode = TimerMode.Stopped;
+						Mode = TimerMode.Finished;
 						return false;
 					default:
 						return false;

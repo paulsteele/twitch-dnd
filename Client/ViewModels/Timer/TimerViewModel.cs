@@ -1,9 +1,7 @@
 using System;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Logging.Abstractions;
 using twitchDnd.Client.Services.Communication;
 using twitchDnd.Client.Services.Web;
 using twitchDnd.Shared.Bases;
@@ -17,8 +15,22 @@ namespace twitchDnd.Client.ViewModels.Timer
 		private readonly SignalRHub _signalRHub;
 		public TimerSession Session { get; private set; } = new();
 		private AuthedHttpClient _httpClient;
-		public bool IsLoading { get; private set; }= true;
+		public bool IsLoading { get; private set; } = true;
 		public string TimerValue => Session.RemainingTimeForCurrentMode.ToString(@"mm\:ss");
+
+		public string ModeDisplay
+		{
+			get
+			{
+				return Session.Mode switch
+				{
+					TimerMode.CollectingResponses => "Collecting Responses",
+					TimerMode.Voting => "Voting",
+					TimerMode.Finished => "Finished",
+					_ => throw new ArgumentOutOfRangeException()
+				};
+			}
+		}
 
 		public TimerViewModel(SignalRHub signalRHub, AuthedHttpClient httpClient)
 		{
